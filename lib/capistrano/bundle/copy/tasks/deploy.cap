@@ -16,6 +16,7 @@ namespace :bundler do
 
     on release_roles :all do
       upload!(File.join(fetch(:bundle_cache_path), '__tmp.tar.gz'), "#{fetch(:tmp_dir)}/#{fetch(:application)}_#{fetch(:stage)}_bundle.tar.gz")
+      execute(:mkdir, '-p', File.join(release_path, 'vendor', 'bundle'))
       execute(:tar, '-f', "#{fetch(:tmp_dir)}/#{fetch(:application)}_#{fetch(:stage)}_bundle.tar.gz", '-x -C', File.join(release_path, 'vendor', 'bundle'))
     end
   end
